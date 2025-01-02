@@ -6,6 +6,8 @@ function setup() {
 }
 function draw() {
   fill(value);
+  color();
+  fill(255, 204, 0);
   rect(25, 25, 50, 50);
   describe(`50-by-50 black rect in center of canvas.
     turns white on mobile when device is being shaked`);
