@@ -1,5 +1,5 @@
 let value = 0;
-let threshold = 10;
+let threshold = 30;
 
 function setup() {
   setShakeThreshold(threshold);
