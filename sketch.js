@@ -13,7 +13,7 @@ function draw() {
   if (frameCount % 4 == 0) {
     totalShake = totalShake + shakeStrength;
   }
-  background(255, 0, 0);
+  background(20, 200, 0);
   text(`Shake Strength tot: ${shakeStrength.toFixed(2)}`, width / 2, height / 2);
 }
 
