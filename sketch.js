@@ -14,7 +14,7 @@ function draw() {
     totalShake = totalShake + shakeStrength;
   }
   background(20, 200, 0);
-  text(`Shake Strength tot: ${shakeStrength.toFixed(2)}`, width / 2, height / 2);
+  text(`Shake Strength tot2: ${totalShake.toFixed(2)}`, width / 2, height / 2);
 }
 
 function deviceShaken() {
