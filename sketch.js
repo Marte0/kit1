@@ -1,25 +1,21 @@
-let value = 0;
-let threshold = 30;
+let shakeStrength = 0;
 
 function setup() {
-  setShakeThreshold(threshold);
+  createCanvas(windowWidth, windowHeight);
+  textAlign(CENTER, CENTER);
+  textSize(32);
+  background(255, 0, 0);
+  fill(255);
 }
+
 function draw() {
-  fill(value);
-  color();
-  fill(255, 204, 0);
-  rect(25, 25, 50, 50);
-  describe(`50-by-50 black rect in center of canvas.
-    turns white on mobile when device is being shaked`);
+  background(255, 0, 0);
+  text(`Shake Strength: ${shakeStrength.toFixed(2)}`, width / 2, height / 2);
 }
-function deviceMoved() {
-  value = value + 5;
-  threshold = threshold + 5;
-  if (value > 255) {
-    value = 0;
-    threshold = 30;
-  }
-  setShakeThreshold(threshold);
+
+function deviceShaken() {
+  // Calculate shake strength using the magnitude of the acceleration
+  shakeStrength = sqrt(sq(accelerationX) + sq(accelerationY) + sq(accelerationZ));
 }
 
 function touchEnded() {
