@@ -4,7 +4,7 @@ let totalShake = 0;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER, CENTER);
-  textSize(32);
+  textSize(15);
   background(255, 0, 0);
   fill(255);
 }
@@ -15,7 +15,7 @@ function draw() {
     shakeStrength = 0;
   }
   background(100, 0, 0);
-  text(`Shake Strength tot2: ${totalShake.toFixed(2)}`, width / 2, height / 2);
+  text(` ${totalShake.toFixed(2)}`, width / 2, height / 2);
 }
 
 function deviceShaken() {
