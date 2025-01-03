@@ -12,9 +12,10 @@ function setup() {
 function draw() {
   if (frameCount % 4 == 0) {
     totalShake = totalShake + shakeStrength;
+    shakeStrength = 0;
   }
-  background(10, 0, 100);
-  text(`Shake Strength tot2: ${shakeStrength.toFixed(2)}`, width / 2, height / 2);
+  background(100, 0, 0);
+  text(`Shake Strength tot2: ${totalShake.toFixed(2)}`, width / 2, height / 2);
 }
 
 function deviceShaken() {
