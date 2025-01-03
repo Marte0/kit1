@@ -15,7 +15,8 @@ function draw() {
     shakeStrength = 0;
   }
   background(100, 0, 0);
-  text(` ${totalShake.toFixed(2)}`, width / 2, height / 2);
+
+  text(` miao:  ${map(totalShake, 0, 80000, 0, 40, true)}`, width / 2, height / 2);
 }
 
 function deviceShaken() {
