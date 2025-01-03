@@ -16,7 +16,7 @@ function draw() {
   }
   background(100, 0, 0);
 
-  text(` miao:  ${map(totalShake, 0, 80000, 0, 40, true)}`, width / 2, height / 2);
+  text(` miao:  ${Math.round(map(totalShake, 0, 80000, 0, 40, true))}`, width / 2, height / 2);
 }
 
 function deviceShaken() {
