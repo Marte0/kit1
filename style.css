@@ -1,8 +1,32 @@
-html, body {
+@import url("https://fonts.cdnfonts.com/css/satoshi");
+
+html,
+body {
   margin: 0;
   padding: 0;
+  font-family: "Satoshi", sans-serif;
 }
 
 canvas {
   display: block;
+}
+
+button {
+  padding: 10px 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  border-radius: 50px;
+  border: 1px solid #804600;
+  background: #fffcf7;
+  box-shadow: 1px 1px 0px 0px #804600;
+
+  color: #804600;
+
+  font-family: "satoshi";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; /* 100% */
 }
