@@ -1,3 +1,4 @@
+//fine pre state machine
 let margin;
 
 //variabili batteria
