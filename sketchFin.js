@@ -63,7 +63,7 @@ function draw() {
     shakeStrength = 0;
   }
   drawBattery();
-  fillBattery(Math.round(map(totalShake, 0, 80000, 0, 40, true)));
+  fillBattery(Math.round(map(totalShake, 0, 50000, 0, 40, true)));
   image(totalShake < 10000 ? lampOffImg : lampOnImg, imgX, batteryY + totalHeight - imgHeight, imgWidth, imgHeight);
   image(totalShake < 30000 ? microOffImg : microOnImg, imgX, batteryY + totalHeight - imgHeight * 2 - margin, imgWidth, imgHeight);
   image(totalShake < 50000 ? hairDryerOffImg : hairDryerOnImg, imgX, batteryY + totalHeight - imgHeight * 3 - margin * 2, imgWidth, imgHeight);
