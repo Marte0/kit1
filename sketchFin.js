@@ -28,7 +28,7 @@ let microOffImg;
 let hairDryerOnImg;
 let hairDryerOffImg;
 
-let timer = 30;
+let timer = 20;
 let timerInterval;
 
 let state = "start"; // Stato iniziale della macchina a stati
@@ -132,7 +132,7 @@ function drawGameScreen() {
 
   if (timer <= 0) {
     state = "end";
-    score = math.round(map(totalShake, 0, 50000, 0, 100)); //da sostituire con i kw effettivi
+    score = Math.round(map(totalShake, 0, 50000, 0, 100)); //da sostituire con i kw effettivi
     playButton.hide();
     replayButton.show();
     clearInterval(timerInterval); // Ferma il timer quando il gioco finisce
@@ -143,7 +143,21 @@ function drawEndScreen() {
   textAlign(LEFT, TOP);
   textSize(24);
   fill("#FFFCF7");
-  text(`Tempo scaduto!\nIn 30 secondi hai generato ${score}kW. abbastanza per accendere un piccolo nano da giardino `, windowWidth / 2, windowHeight / 2 - 50);
+  text(`Tempo scaduto!\nIn 30 secondi hai generato:`, margin, margin, windowWidth - margin);
+
+  textAlign(CENTER, TOP);
+  textSize(50);
+  text(`${score}kW`, windowWidth / 2, margin + 48 + margin);
+
+  textAlign(LEFT, TOP);
+  textSize(24);
+
+  if (totalShake < 10000) {
+    textAlign(LEFT, TOP);
+    textSize(24);
+    text(`non è abbastanza energia nemmeno per accendere una lampadina per 10 secondi`, margin, margin + 48 + margin + 50 + margin, windowWidth - margin);
+  }
+
   //text(`Tempo scaduto!\nIl tuo punteggio è: ${score}kW\nPremi 'Rigioca' per riprovare.`, windowWidth / 2, windowHeight / 2 - 50);
   playButton.hide();
   replayButton.show();
@@ -151,7 +165,7 @@ function drawEndScreen() {
 
 function startGame() {
   state = "game";
-  timer = 30;
+  timer = 20;
   totalShake = 0;
   playButton.hide();
   replayButton.hide();
@@ -167,7 +181,7 @@ function startGame() {
 
 function restartGame() {
   state = "start";
-  timer = 30;
+  timer = 10;
   totalShake = 0;
   score = 0;
   playButton.show();
@@ -228,4 +242,24 @@ function drawImage(img, imgX = windowWidth / 12, imgY = 0) {
   //let imgY = batteryY + totalHeight - imgHeight;
 
   image(img, imgX, imgY, imgWidth, imgHeight);
+}
+
+function textHeight(text, maxWidth = windowWidth - margin * 2) {
+  var words = text.split(" ");
+  var line = "";
+  var h = this._textLeading;
+
+  for (var i = 0; i < words.length; i++) {
+    var testLine = line + words[i] + " ";
+    var testWidth = drawingContext.measureText(testLine).width;
+
+    if (testWidth > maxWidth && i > 0) {
+      line = words[i] + " ";
+      h += this._textLeading;
+    } else {
+      line = testLine;
+    }
+  }
+
+  return h;
 }
