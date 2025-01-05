@@ -105,7 +105,12 @@ function drawStartScreen() {
   textAlign(LEFT, TOP);
   textSize(24);
   fill("#FFFCF7");
-  text("Scuoti il telefono per generare energia. Hai 30 secondi per generare più energia possibile, scopri quale di questi elettrodomestici saresti in grado di accendere", margin, logoHeight + 2 * margin, windowWidth - margin);
+  text(
+    "Scopri a quanta energia corrisponde un kW e quanta riesci a generarne tu in 20 secondi!\n Scuoti il telefono fino allo scadere del timer e scopri quale elettrodomestico riusciresti ad accendere.",
+    margin,
+    logoHeight + 2 * margin,
+    windowWidth - margin
+  );
   drawImage(lampOnImg, 0, windowHeight / 2);
   drawImage(microOnImg, 1, windowHeight / 2);
   drawImage(hairDryerOnImg, 2, windowHeight / 2);
@@ -156,7 +161,7 @@ function drawEndScreen() {
   textAlign(LEFT, TOP);
   textSize(24);
   fill("#FFFCF7");
-  text(`Tempo scaduto!\nIn 30 secondi hai generato:`, margin, logoHeight + 2 * margin, windowWidth - margin);
+  text(`Tempo scaduto!\nIn 20 secondi hai generato:`, margin, logoHeight + 2 * margin, windowWidth - margin);
 
   textAlign(CENTER, TOP);
   textSize(50);
