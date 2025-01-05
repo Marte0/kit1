@@ -130,6 +130,7 @@ function drawGameScreen() {
   if (frameCount % 4 == 0) {
     totalShake = totalShake + shakeStrength;
     shakeStrength = 0;
+    score = Math.round(map(totalShake, 0, 50000, 0, 100)); //da sostituire con i kw effettivi
   }
   drawBattery(logoHeight + 3 * margin + 60); // Passa la posizione Y della batteria
   fillBattery(Math.round(map(totalShake, 0, 50000, 0, 40, true)));
@@ -139,7 +140,7 @@ function drawGameScreen() {
 
   if (timer <= 0) {
     state = "end";
-    score = Math.round(map(totalShake, 0, 50000, 0, 100)); //da sostituire con i kw effettivi
+
     playButton.hide();
     replayButton.show();
     clearInterval(timerInterval); // Ferma il timer quando il gioco finisce
@@ -219,7 +220,7 @@ function drawBattery() {
   textAlign(CENTER, CENTER);
   textSize(20);
   fill("#FFFCF7");
-  text(`${totalShake}kW`, batteryX + rectWidth / 2, batteryY + totalHeight + totalHeight / 12);
+  text(`${score}kW`, batteryX + rectWidth / 2, batteryY + totalHeight + totalHeight / 12);
 }
 
 function fillBattery(filledBattery = 0) {
