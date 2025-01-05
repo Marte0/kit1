@@ -35,8 +35,10 @@ let state = "start"; // Stato iniziale della macchina a stati
 let score = 0;
 let playButton, replayButton;
 let finalAppliance = "lampadina";
+let logoImg;
 
 function preload() {
+  logoImg = loadImage("footage/logo_wattAbout.png");
   lampOffImg = loadImage("footage/lampOff.png");
   lampOnImg = loadImage("footage/lampOn.png");
 
@@ -65,11 +67,11 @@ function setup() {
 
   //batteria
   rectWidth = windowWidth / 3;
-  rectHeight = (windowHeight - 300) / 45; // Space for rectangles and margins
+  rectHeight = (windowHeight - 300) / 50; // Space for rectangles and margins
   innerBatteryMargins = rectHeight / 4; // margins between rectangles
   totalHeight = (rectHeight + innerBatteryMargins) * 40;
   batteryX = windowWidth - rectWidth - rectWidth / 12 - margin;
-  batteryY = (windowHeight - totalHeight) / 2 + windowHeight / 12;
+  batteryY = (windowHeight - totalHeight) / 2 + margin * 2;
 
   //images
   imgHeight = totalHeight / 5;
@@ -100,31 +102,36 @@ function draw() {
 }
 
 function drawStartScreen() {
+  let margin = 20;
+  let logoHeight = (logoImg.height * (windowWidth / 5)) / logoImg.width;
+  image(logoImg, windowWidth / 2 - windowWidth / 10, margin, windowWidth / 5, logoHeight);
+
   textAlign(LEFT, TOP);
   textSize(24);
   fill("#FFFCF7");
-  text("Scuoti il telefono per generare energia.hai 30 secondi per generare più energia possibile, scopri quale di questi elettrodomestici saresti in grado di accendere", margin, margin, windowWidth - margin);
-  drawImage(lampOnImg, margin, windowHeight / 2);
-  drawImage(microOnImg, windowWidth / 2 - (microOnImg.width * (imgHeight / microOnImg.height)) / 2, windowHeight / 2);
-  drawImage(hairDryerOnImg, windowWidth - margin - hairDryerOnImg.width * (imgHeight / hairDryerOnImg.height), windowHeight / 2);
-  //drawImage(microOnImg, batteryY + totalHeight - imgHeight * 2 - margin);
-  //drawImage(hairDryerOnImg, batteryY + totalHeight - imgHeight * 3 - margin * 2);
+  text("Scuoti il telefono per generare energia. Hai 30 secondi per generare più energia possibile, scopri quale di questi elettrodomestici saresti in grado di accendere", margin, logoHeight + 2 * margin, windowWidth - margin);
+  drawImage(lampOnImg, 0, windowHeight / 2);
+  drawImage(microOnImg, 1, windowHeight / 2);
+  drawImage(hairDryerOnImg, 2, windowHeight / 2);
   playButton.show();
   replayButton.hide();
 }
 
 function drawGameScreen() {
-  // Disegna il timer
+  let margin = 20;
+  let logoHeight = (logoImg.height * (windowWidth / 5)) / logoImg.width;
+  image(logoImg, windowWidth / 2 - windowWidth / 10, margin, windowWidth / 5, logoHeight);
+
   textAlign(CENTER, TOP);
   textSize(60);
   fill("#FFFCF7");
-  text(timer, windowWidth / 2, margin);
+  text(timer, windowWidth / 2, logoHeight + 2 * margin);
 
   if (frameCount % 4 == 0) {
     totalShake = totalShake + shakeStrength;
     shakeStrength = 0;
   }
-  drawBattery();
+  drawBattery(logoHeight + 3 * margin + 60); // Passa la posizione Y della batteria
   fillBattery(Math.round(map(totalShake, 0, 50000, 0, 40, true)));
   image(totalShake < 10000 ? lampOffImg : lampOnImg, imgX, batteryY + totalHeight - imgHeight, imgWidth, imgHeight);
   image(totalShake < 30000 ? microOffImg : microOnImg, imgX, batteryY + totalHeight - imgHeight * 2 - margin, imgWidth, imgHeight);
@@ -140,14 +147,18 @@ function drawGameScreen() {
 }
 
 function drawEndScreen() {
+  let margin = 20;
+  let logoHeight = (logoImg.height * (windowWidth / 5)) / logoImg.width;
+  image(logoImg, windowWidth / 2 - windowWidth / 10, margin, windowWidth / 5, logoHeight);
+
   textAlign(LEFT, TOP);
   textSize(24);
   fill("#FFFCF7");
-  text(`Tempo scaduto!\nIn 30 secondi hai generato:`, margin, margin, windowWidth - margin);
+  text(`Tempo scaduto!\nIn 30 secondi hai generato:`, margin, logoHeight + 2 * margin, windowWidth - margin);
 
   textAlign(CENTER, TOP);
   textSize(50);
-  text(`${score}kW`, windowWidth / 2, margin + 48 + margin);
+  text(`${score}kW`, windowWidth / 2, logoHeight + 2 * margin + 48 + margin);
 
   textAlign(LEFT, TOP);
   textSize(24);
@@ -155,11 +166,9 @@ function drawEndScreen() {
   if (totalShake < 10000) {
     textAlign(LEFT, TOP);
     textSize(24);
-    text(`non è abbastanza energia nemmeno per accendere una lampadina per 10 secondi`, margin, margin + 48 + margin + 50 + margin, windowWidth - margin);
+    text(`Non è abbastanza energia nemmeno per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
   }
 
-  //text(`Tempo scaduto!\nIl tuo punteggio è: ${score}kW\nPremi 'Rigioca' per riprovare.`, windowWidth / 2, windowHeight / 2 - 50);
-  playButton.hide();
   replayButton.show();
 }
 
@@ -235,31 +244,22 @@ function touchEnded() {
   }
 }
 
-function drawImage(img, imgX = windowWidth / 12, imgY = 0) {
+function drawImage(img, index, imgY = 0) {
   let imgHeight = totalHeight / 5;
   let imgWidth = img.width * (imgHeight / img.height);
 
-  //let imgY = batteryY + totalHeight - imgHeight;
+  // Calcola la larghezza massima consentita
+  let margin = 10; // Puoi cambiare questo valore in base alle tue esigenze
+  let maxWidth = (windowWidth - margin * 2) / 3 - margin;
 
-  image(img, imgX, imgY, imgWidth, imgHeight);
-}
-
-function textHeight(text, maxWidth = windowWidth - margin * 2) {
-  var words = text.split(" ");
-  var line = "";
-  var h = this._textLeading;
-
-  for (var i = 0; i < words.length; i++) {
-    var testLine = line + words[i] + " ";
-    var testWidth = drawingContext.measureText(testLine).width;
-
-    if (testWidth > maxWidth && i > 0) {
-      line = words[i] + " ";
-      h += this._textLeading;
-    } else {
-      line = testLine;
-    }
+  // Se la larghezza dell'immagine supera la larghezza massima, ridimensiona l'immagine
+  if (imgWidth > maxWidth) {
+    imgWidth = maxWidth;
+    imgHeight = img.height * (imgWidth / img.width);
   }
 
-  return h;
+  // Calcola la posizione X in base all'indice
+  let imgX = margin + index * (maxWidth + margin);
+
+  image(img, imgX, imgY, imgWidth, imgHeight);
 }

@@ -13,6 +13,15 @@
   </head>
 
   <body>
+    <div id="warning-message">
+      <img src="footage/logo_wattAbout.png" alt="Logo" />
+      Il gioco può essere giocato solamente su mobile
+    </div>
     <script src="sketchFin.js"></script>
+    <script>
+      if (window.innerWidth >= 768) {
+        document.getElementById("warning-message").style.display = "block";
+      }
+    </script>
   </body>
 </html>
