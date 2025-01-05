@@ -21,11 +21,12 @@ button {
   align-items: center;
   gap: 24px;
   border-radius: 50px;
-  border: 1px solid #804600;
+  /* border: 1px solid #804600; */
+  border: none;
   background: #fffcf7;
-  box-shadow: 1px 1px 0px 0px #804600;
+  /* box-shadow: 1px 1px 0px 0px #804600; */
 
-  color: #804600;
+  color: #331005;
 
   font-family: "satoshi";
   font-size: 30px;
