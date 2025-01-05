@@ -16,8 +16,6 @@ let totalShake = 0;
 
 //variabili immagine
 let imgHeight;
-let imgWidth;
-let imgX;
 
 let lampOffImg;
 let lampOnImg;
@@ -73,10 +71,8 @@ function setup() {
   batteryX = windowWidth - rectWidth - rectWidth / 12 - margin;
   batteryY = (windowHeight - totalHeight) / 2 + margin * 2;
 
-  //images
+  //immagini
   imgHeight = totalHeight / 5;
-  imgWidth = 700 * (imgHeight / 700);
-  imgX = windowWidth / 20;
 
   // Crea i pulsanti
   playButton = createButton("Gioca");
@@ -134,9 +130,14 @@ function drawGameScreen() {
   }
   drawBattery(logoHeight + 3 * margin + 60); // Passa la posizione Y della batteria
   fillBattery(Math.round(map(totalShake, 0, 50000, 0, 40, true)));
-  image(totalShake < 10000 ? lampOffImg : lampOnImg, imgX, batteryY + totalHeight - imgHeight, imgWidth, imgHeight);
-  image(totalShake < 30000 ? microOffImg : microOnImg, imgX, batteryY + totalHeight - imgHeight * 2 - margin, imgWidth, imgHeight);
-  image(totalShake < 50000 ? hairDryerOffImg : hairDryerOnImg, imgX, batteryY + totalHeight - imgHeight * 3 - margin * 2, imgWidth, imgHeight);
+
+  drawImage(totalShake < 10000 ? lampOffImg : lampOnImg, 0, batteryY + totalHeight - imgHeight);
+  drawImage(totalShake < 30000 ? microOffImg : microOnImg, 0, batteryY + totalHeight - imgHeight * 2 - margin);
+  drawImage(totalShake < 50000 ? hairDryerOffImg : hairDryerOnImg, 0, batteryY + totalHeight - imgHeight * 3 - margin * 2);
+
+  // image(totalShake < 10000 ? lampOffImg : lampOnImg, imgX, batteryY + totalHeight - imgHeight, imgWidth, imgHeight);
+  // image(totalShake < 30000 ? microOffImg : microOnImg, imgX, batteryY + totalHeight - imgHeight * 2 - margin, imgWidth, imgHeight);
+  // image(totalShake < 50000 ? hairDryerOffImg : hairDryerOnImg, imgX, batteryY + totalHeight - imgHeight * 3 - margin * 2, imgWidth, imgHeight);
 
   if (timer <= 0) {
     state = "end";
@@ -168,6 +169,26 @@ function drawEndScreen() {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Non è abbastanza energia nemmeno per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
+    drawImage(lampOffImg, 1, windowHeight / 2);
+  }
+
+  if (totalShake >= 10000 && totalShake < 30000) {
+    textAlign(LEFT, TOP);
+    textSize(24);
+    text(`Hai generato energia sufficiente per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
+    drawImage(lampOnImg, 1, windowHeight / 2);
+  }
+  if (totalShake >= 30000 && totalShake < 50000) {
+    textAlign(LEFT, TOP);
+    textSize(24);
+    text(`Hai generato energia sufficiente per accendere un microonde per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
+    drawImage(microOnImg, 1, windowHeight / 2);
+  }
+  if (totalShake >= 50000) {
+    textAlign(LEFT, TOP);
+    textSize(24);
+    text(`Hai generato energia sufficiente per accendere un asciugacapelli per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
+    drawImage(hairDryerOnImg, 1, windowHeight / 2);
   }
 
   replayButton.show();
@@ -246,12 +267,13 @@ function touchEnded() {
 }
 
 function drawImage(img, index, imgY = 0) {
-  let imgHeight = totalHeight / 5;
+  //imgHeight è gia stato stanziato prima
   let imgWidth = img.width * (imgHeight / img.height);
+  let imgX;
 
   // Calcola la larghezza massima consentita
-  let margin = 10; // Puoi cambiare questo valore in base alle tue esigenze
-  let maxWidth = (windowWidth - margin * 2) / 3 - margin;
+
+  let maxWidth = (windowWidth - 20 * 2) / 3 - 20;
 
   // Se la larghezza dell'immagine supera la larghezza massima, ridimensiona l'immagine
   if (imgWidth > maxWidth) {
@@ -260,7 +282,17 @@ function drawImage(img, index, imgY = 0) {
   }
 
   // Calcola la posizione X in base all'indice
-  let imgX = margin + index * (maxWidth + margin);
+  switch (index) {
+    case 0:
+      imgX = margin;
+      break;
+    case 1:
+      imgX = windowWidth / 2 - imgWidth / 2;
+      break;
+    case 2:
+      imgX = windowWidth - margin - imgWidth;
+      break;
+  }
 
   image(img, imgX, imgY, imgWidth, imgHeight);
 }
