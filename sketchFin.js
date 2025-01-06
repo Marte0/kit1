@@ -72,7 +72,7 @@ function setup() {
   batteryY = (windowHeight - totalHeight) / 2 + margin * 2;
 
   //immagini
-  imgHeight = totalHeight / 5;
+  imgHeight = totalHeight / 4;
 
   // Crea i pulsanti
   playButton = createButton("Gioca");
@@ -111,9 +111,9 @@ function drawStartScreen() {
     logoHeight + 2 * margin,
     windowWidth - margin
   );
-  drawImage(lampOnImg, 0, windowHeight / 2);
-  drawImage(microOnImg, 1, windowHeight / 2);
-  drawImage(hairDryerOnImg, 2, windowHeight / 2);
+  drawImage(lampOnImg, 0, windowHeight / 2 + 50);
+  drawImage(microOnImg, 1, windowHeight / 2 + 50);
+  drawImage(hairDryerOnImg, 2, windowHeight / 2 + 50);
   playButton.show();
   replayButton.hide();
 }
@@ -174,26 +174,26 @@ function drawEndScreen() {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Non è abbastanza energia nemmeno per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
-    drawImage(lampOffImg, 1, windowHeight / 2);
+    drawImage(lampOffImg, 1, windowHeight / 2 + 50);
   }
 
   if (totalShake >= 10000 && totalShake < 30000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
-    drawImage(lampOnImg, 1, windowHeight / 2);
+    drawImage(lampOnImg, 1, windowHeight / 2 + 50);
   }
   if (totalShake >= 30000 && totalShake < 50000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere un microonde per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
-    drawImage(microOnImg, 1, windowHeight / 2);
+    drawImage(microOnImg, 1, windowHeight / 2 + 50);
   }
   if (totalShake >= 50000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere un asciugacapelli per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
-    drawImage(hairDryerOnImg, 1, windowHeight / 2);
+    drawImage(hairDryerOnImg, 1, windowHeight / 2 + 50);
   }
 
   replayButton.show();
@@ -278,7 +278,7 @@ function drawImage(img, index, imgY = 0) {
 
   // Calcola la larghezza massima consentita
 
-  let maxWidth = (windowWidth - 20 * 2) / 3 - 20;
+  let maxWidth = (windowWidth - margin * 2) / 3;
 
   // Se la larghezza dell'immagine supera la larghezza massima, ridimensiona l'immagine
   if (imgWidth > maxWidth) {
