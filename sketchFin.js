@@ -174,26 +174,30 @@ function drawEndScreen() {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Non è abbastanza energia nemmeno per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
-    drawImage(lampOffImg, 1, windowHeight / 2 + 50);
+    // drawImage(lampOffImg, 1, windowHeight / 2 + 50);
+    image(lampOffImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2, windowWidth / 3, lampOffImg.height * (windowWidth / 3 / lampOffImg.width));
   }
 
   if (totalShake >= 5000 && totalShake < 10000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
-    drawImage(lampOnImg, 1, windowHeight / 2 + 50);
+    //drawImage(lampOnImg, 1, windowHeight / 2 + 50);
+    image(lampOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2, windowWidth / 3, lampOnImg.height * (windowWidth / 3 / lampOnImg.width));
   }
   if (totalShake >= 10000 && totalShake < 20000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere un microonde per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
-    drawImage(microOnImg, 1, windowHeight / 2 + 50);
+    //drawImage(microOnImg, 1, windowHeight / 2 + 50);
+    image(microOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2, windowWidth / 3, microOnImg.height * (windowWidth / 3 / microOnImg.width));
   }
   if (totalShake >= 30000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere un asciugacapelli per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
-    drawImage(hairDryerOnImg, 1, windowHeight / 2 + 50);
+    //drawImage(hairDryerOnImg, 1, windowHeight / 2 + 50);
+    image(hairDryerOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2, windowWidth / 3, hairDryerOnImg.height * (windowWidth / 3 / hairDryerOnImg.width));
   }
 
   replayButton.show();
