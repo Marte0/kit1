@@ -131,10 +131,10 @@ function drawGameScreen() {
   if (frameCount % 4 == 0) {
     totalShake = totalShake + shakeStrength;
     shakeStrength = 0;
-    score = Math.round(map(totalShake, 0, 50000, 0, 100)); //da sostituire con i kw effettivi
+    score = Math.round(map(totalShake, 0, 30000, 0, 100)); //da sostituire con i kw effettivi
   }
   drawBattery(logoHeight + 3 * margin + 60); // Passa la posizione Y della batteria
-  fillBattery(Math.round(map(totalShake, 0, 50000, 0, 40, true)));
+  fillBattery(Math.round(map(totalShake, 0, 30000, 0, 40, true)));
 
   drawImage(totalShake < 10000 ? lampOffImg : lampOnImg, 0, batteryY + totalHeight - imgHeight);
   drawImage(totalShake < 30000 ? microOffImg : microOnImg, 0, batteryY + totalHeight - imgHeight * 2 - margin);
@@ -170,26 +170,26 @@ function drawEndScreen() {
   textAlign(LEFT, TOP);
   textSize(24);
 
-  if (totalShake < 10000) {
+  if (totalShake < 5000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Non è abbastanza energia nemmeno per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
     drawImage(lampOffImg, 1, windowHeight / 2 + 50);
   }
 
-  if (totalShake >= 10000 && totalShake < 30000) {
+  if (totalShake >= 5000 && totalShake < 10000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
     drawImage(lampOnImg, 1, windowHeight / 2 + 50);
   }
-  if (totalShake >= 30000 && totalShake < 50000) {
+  if (totalShake >= 10000 && totalShake < 20000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere un microonde per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
     drawImage(microOnImg, 1, windowHeight / 2 + 50);
   }
-  if (totalShake >= 50000) {
+  if (totalShake >= 30000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere un asciugacapelli per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
