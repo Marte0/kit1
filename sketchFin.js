@@ -134,11 +134,11 @@ function drawGameScreen() {
     score = Math.round(map(totalShake, 0, 30000, 0, 100)); //da sostituire con i kw effettivi
   }
   drawBattery(logoHeight + 3 * margin + 60); // Passa la posizione Y della batteria
-  fillBattery(Math.round(map(totalShake, 0, 30000, 0, 40, true)));
+  fillBattery(Math.round(map(totalShake, 0, 20000, 0, 40, true)));
 
-  drawImage(totalShake < 10000 ? lampOffImg : lampOnImg, 0, batteryY + totalHeight - imgHeight);
-  drawImage(totalShake < 30000 ? microOffImg : microOnImg, 0, batteryY + totalHeight - imgHeight * 2 - margin);
-  drawImage(totalShake < 50000 ? hairDryerOffImg : hairDryerOnImg, 0, batteryY + totalHeight - imgHeight * 3 - margin * 2);
+  drawImage(totalShake < 5000 ? lampOffImg : lampOnImg, 0, batteryY + totalHeight - imgHeight);
+  drawImage(totalShake < 10000 ? microOffImg : microOnImg, 0, batteryY + totalHeight - imgHeight * 2 - margin);
+  drawImage(totalShake < 20000 ? hairDryerOffImg : hairDryerOnImg, 0, batteryY + totalHeight - imgHeight * 3 - margin * 2);
 
   // image(totalShake < 10000 ? lampOffImg : lampOnImg, imgX, batteryY + totalHeight - imgHeight, imgWidth, imgHeight);
   // image(totalShake < 30000 ? microOffImg : microOnImg, imgX, batteryY + totalHeight - imgHeight * 2 - margin, imgWidth, imgHeight);
@@ -183,21 +183,21 @@ function drawEndScreen() {
     textSize(24);
     text(`Hai generato energia sufficiente per accendere una lampadina per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
     //drawImage(lampOnImg, 1, windowHeight / 2 + 50);
-    image(lampOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2, windowWidth / 3, lampOnImg.height * (windowWidth / 3 / lampOnImg.width));
+    image(lampOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2 + 50, windowWidth / 3, lampOnImg.height * (windowWidth / 3 / lampOnImg.width));
   }
   if (totalShake >= 10000 && totalShake < 20000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere un microonde per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
     //drawImage(microOnImg, 1, windowHeight / 2 + 50);
-    image(microOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2, windowWidth / 3, microOnImg.height * (windowWidth / 3 / microOnImg.width));
+    image(microOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2 + 50, windowWidth / 3, microOnImg.height * (windowWidth / 3 / microOnImg.width));
   }
-  if (totalShake >= 30000) {
+  if (totalShake >= 20000) {
     textAlign(LEFT, TOP);
     textSize(24);
     text(`Hai generato energia sufficiente per accendere un asciugacapelli per 10 secondi`, margin, logoHeight + 2 * margin + 48 + margin + 50 + margin, windowWidth - margin);
     //drawImage(hairDryerOnImg, 1, windowHeight / 2 + 50);
-    image(hairDryerOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2, windowWidth / 3, hairDryerOnImg.height * (windowWidth / 3 / hairDryerOnImg.width));
+    image(hairDryerOnImg, windowWidth / 2 - windowWidth / 3 / 2, windowHeight / 2 + 50, windowWidth / 3, hairDryerOnImg.height * (windowWidth / 3 / hairDryerOnImg.width));
   }
 
   replayButton.show();
